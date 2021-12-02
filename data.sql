@@ -49,3 +49,43 @@ UPDATE animals
 
 -- Commit transaction
 COMMIT;
+
+INSERT INTO species (name) VALUES ('Pokemon', 'Digimon');
+
+INSERT INTO owners (name, age) VALUES ('Sam Smith', 34), ('Jenniger Orwell', 19), ('Bob', 45), ('Melody Pond', 77), ('Dean Winchester', 14), ('Jodie Whittaker', 38);
+
+-- If the name ends in "mon" it will be Digimon
+UPDATE animals
+  SET species_id = 2
+  WHERE name LIKE '%mon%';
+
+-- All other animals are Pokemon
+UPDATE animals
+  SET species_id = species.id
+  FROM species
+  WHERE animals.name NOT LIKE '%mon%';
+
+-- Sam Smith owns Agumon.
+UPDATE animals
+  SET owner_id = 7
+  WHERE name = 'Agumon';
+
+-- Jennifer Orwell owns Gabumon and Pikachu.
+UPDATE animals
+  SET owner_id = 8
+  WHERE name = 'Gabumon' OR name = 'Pikachu';
+
+-- Bob owns Devimon and Plantmon.
+UPDATE animals
+  SET owner_id = 9
+  WHERE name = 'Devimon' OR name = 'Plantmon';
+
+-- Melody Pond owns Charmander, Squirtle, and Blossom.
+UPDATE animals
+  SET owner_id = 10
+  WHERE name = 'Charmander' OR name = 'Squirtle' OR name = 'Blossom';
+
+-- Dean Winchester owns Angemon and Boarmon.
+UPDATE animals
+  SET owner_id = 11
+  WHERE name = 'Angemon' OR name = 'Boarmon';
